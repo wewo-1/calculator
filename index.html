@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Calculator</title>
+  <title>Calculator</title>
   <style>
     * {
       box-sizing: border-box;
@@ -26,7 +26,6 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       padding: 30px 20px;
       width: 320px;
-      transition: all 0.3s ease;
     }
 
     #display {
@@ -70,7 +69,6 @@
       transform: scale(0.97);
     }
 
-    /* Modal Styling */
     .modal {
       position: fixed;
       top: 0;
@@ -89,6 +87,7 @@
       padding: 30px;
       border-radius: 20px;
       text-align: center;
+      max-width: 400px;
       animation: fadeIn 0.5s ease-in-out;
     }
 
@@ -127,12 +126,12 @@
 
     .letter {
       font-size: 16px;
-      margin-top: 10px;
       color: #333;
+      margin: 10px 0 20px;
     }
 
-    .close-btn {
-      margin-top: 20px;
+    .close-btn, .open-letter-btn {
+      margin-top: 10px;
       padding: 10px 20px;
       background: #2196f3;
       color: white;
@@ -141,8 +140,18 @@
       cursor: pointer;
     }
 
-    .close-btn:hover {
+    .close-btn:hover, .open-letter-btn:hover {
       background: #1976d2;
+    }
+
+    .letter-icon {
+      font-size: 32px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .letter-icon:hover {
+      transform: scale(1.2);
     }
 
     @keyframes flicker {
@@ -153,6 +162,12 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
+    }
+
+    .long-letter-content {
+      max-height: 400px;
+      overflow-y: auto;
+      text-align: left;
     }
   </style>
 </head>
@@ -182,27 +197,46 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Birthday Popup -->
   <div class="modal" id="birthdayModal">
     <div class="modal-content">
-      <h2>🎉 Happy 19th Birthday! 🎂</h2>
-      <div class="cake-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" alt="Left Decoration" class="side-img">
+        <h2>🎉 Happy Birthday! 🎂</h2>
+        <div class="cake-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" class="side-img" alt="Left">
         <div class="cake"></div>
-        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" alt="Right Decoration" class="side-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" class="side-img" alt="Right">
+        </div>
+
+        <p class="letter" style="margin-bottom: 5px; font-weight: bold;">Open your birthday letter</p>
+        <div onclick="openLongLetter()" class="letter-icon" title="Open Letter">💌</div>
+
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Long Letter Modal -->
+  <div class="modal" id="longLetterModal">
+    <div class="modal-content">
+      <h3>📜</h3>
+      <div class="long-letter-content">
+        <p>
+          Mae,<br><br>
+          Today is a day that marks your journey, your strength, and the joy you bring to the world. You've grown into someone extraordinary — someone whose kindness, laughter, and light touches everyone around them.<br><br>
+          Birthdays are not just about cake or gifts, but about the quiet moments we reflect on — where we've been, who we've become, and who we still hope to be. I hope this year brings you peace, wild joy, and the courage to chase all your dreams unapologetically.<br><br>
+          I’m so grateful to know you, to witness your light, and to celebrate your existence.<br><br>
+          Happy, happy birthday. May all your wishes bloom into reality. 🎉💙<br><br>
+          Yours always,<br>
+          — [Your Name]
+        </p>
       </div>
-      <p class="letter">
-        Dear [Name],<br><br>
-        Wishing you a day filled with love, laughter, and everything you dream of. You deserve all the happiness in the world. 💙<br><br>
-        — lj ^_^
-      </p>
-      <button class="close-btn" onclick="closeModal()">Close</button>
+      <button class="close-btn" onclick="closeLongLetter()">Close</button>
     </div>
   </div>
 
   <script>
     const display = document.getElementById("display");
-    const modal = document.getElementById("birthdayModal");
+    const birthdayModal = document.getElementById("birthdayModal");
+    const longLetterModal = document.getElementById("longLetterModal");
 
     function append(value) {
       display.value += value;
@@ -216,7 +250,7 @@
       const input = display.value.replace(/\s+/g, '');
       if (input === "7+26+2025") {
         display.value = "19";
-        modal.style.display = "flex";
+        birthdayModal.style.display = "flex";
       } else {
         try {
           const result = eval(input);
@@ -228,7 +262,16 @@
     }
 
     function closeModal() {
-      modal.style.display = "none";
+      birthdayModal.style.display = "none";
+    }
+
+    function openLongLetter() {
+      birthdayModal.style.display = "none";
+      longLetterModal.style.display = "flex";
+    }
+
+    function closeLongLetter() {
+      longLetterModal.style.display = "none";
     }
   </script>
 </body>
