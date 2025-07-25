@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Special Calculator</title>
+  <title>Calculator</title>
   <style>
     * {
       box-sizing: border-box;
@@ -171,11 +171,6 @@
       animation: flicker 0.3s infinite alternate;
     }
 
-    .side-img {
-      width: 60px;
-      height: 60px;
-    }
-
     .letter {
       font-size: 16px;
       color: #333;
@@ -258,17 +253,13 @@
     <div class="modal-content">
         <h2>🎉 Happy Birthday! 🎂</h2>
         <div class="cake-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" class="side-img" alt="Left">
-        <div class="cake"></div>
-        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" class="side-img" alt="Right">
+          <div class="cake"></div>
         </div>
-
         <p class="letter" style="margin-bottom: 5px; font-weight: bold;">Open these!</p>
         <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;">
           <div onclick="openLongLetter()" class="letter-icon" title="Open Letter">✉️</div>
           <div onclick="openPictureGallery()" class="letter-icon" title="Open Pictures">🖼️</div>
         </div>
-        
         <button class="close-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
