@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      padding: 30px 20px;
+      width: 320px;
+      transition: all 0.3s ease;
+    }
+
+    #display {
+      width: 100%;
+      height: 60px;
+      font-size: 28px;
+      text-align: right;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .buttons button {
+      padding: 18px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background: #ffffffcc;
+      color: #333;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background: #b3e5fc;
+    }
+
+    .buttons button:active {
+      background: #81d4fa;
+      transform: scale(0.97);
+    }
+
+    /* Modal Styling */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .modal-content {
+      background: #cceeff;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .cake-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .cake {
+      width: 100px;
+      height: 120px;
+      background: pink;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .cake:before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 40px;
+      width: 20px;
+      height: 20px;
+      background: orange;
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    .side-img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .letter {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #1976d2;
+    }
+
+    @keyframes flicker {
+      0% { background: gold; }
+      100% { background: red; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('+')">+</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">-</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('*')">*</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="append('/')">/</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="birthdayModal">
+    <div class="modal-content">
+      <h2>🎉 Happy 19th Birthday! 🎂</h2>
+      <div class="cake-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" alt="Left Decoration" class="side-img">
+        <div class="cake"></div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" alt="Right Decoration" class="side-img">
+      </div>
+      <p class="letter">
+        Dear [Name],<br><br>
+        Wishing you a day filled with love, laughter, and everything you dream of. You deserve all the happiness in the world. 💙<br><br>
+        — lj ^_^
+      </p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    const modal = document.getElementById("birthdayModal");
+
+    function append(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function calculate() {
+      const input = display.value.replace(/\s+/g, '');
+      if (input === "7+26+2025") {
+        display.value = "19";
+        modal.style.display = "flex";
+      } else {
+        try {
+          const result = eval(input);
+          display.value = result;
+        } catch (e) {
+          display.value = "Error";
+        }
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+  </script>
+</body>
+</html>
