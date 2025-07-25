@@ -133,12 +133,12 @@
 
     .modal-content {
       background: #cceeff;
-      padding: 30px;
+      padding: 30px 20px;
       border-radius: 20px;
       text-align: center;
-      max-width: 90vw;
+      width: 95vw;
+      max-width: 600px;
       max-height: 90vh;
-      width: 800px;
       overflow-y: auto;
       animation: fadeIn 0.5s ease-in-out;
     }
@@ -285,11 +285,11 @@
   <div class="modal" id="pictureGalleryModal">
     <div class="modal-content">
       <h2 style="margin-bottom: 20px;">Here are some of your best pics through my lens!</h2>
-      <div style="display: flex; overflow-x: auto; gap: 20px; padding: 10px 0;">
-        <img src="https://drive.google.com/thumbnail?id=1CoCl0xY-Vcti0_XMmxPijrFU0rpywzPU&sz=w1000" alt="pic1" style="height: 300px; border-radius: 12px; flex-shrink: 0;">
-        <img src="https://drive.google.com/thumbnail?id=1XUKSAY2xhwWT5crjW301rJKCL3qqeQlh&sz=w1000" alt="pic2" style="height: 300px; border-radius: 12px; flex-shrink: 0;">
-        <img src="https://drive.google.com/thumbnail?id=1iMsgEkiaT7sWu87cOkrKZFgqGpPmyNQU&sz=w1000" alt="pic3" style="height: 300px; border-radius: 12px; flex-shrink: 0;">
-        <img src="https://drive.google.com/thumbnail?id=1g91Vv5DQHvIV0PngC0U7OWqjGTRZeOM1&sz=w1000" alt="pic4" style="height: 300px; border-radius: 12px; flex-shrink: 0;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;">
+        <img src="https://drive.google.com/thumbnail?id=1CoCl0xY-Vcti0_XMmxPijrFU0rpywzPU&sz=w1000" alt="pic1" style="width: 100%; max-width: 100%; border-radius: 12px;">
+        <img src="https://drive.google.com/thumbnail?id=1XUKSAY2xhwWT5crjW301rJKCL3qqeQlh&sz=w1000" alt="pic2" style="width: 100%; max-width: 100%; border-radius: 12px;">
+        <img src="https://drive.google.com/thumbnail?id=1iMsgEkiaT7sWu87cOkrKZFgqGpPmyNQU&sz=w1000" alt="pic3" style="width: 100%; max-width: 100%; border-radius: 12px;">
+        <img src="https://drive.google.com/thumbnail?id=1g91Vv5DQHvIV0PngC0U7OWqjGTRZeOM1&sz=w1000" alt="pic4" style="width: 100%; max-width: 100%; border-radius: 12px;">
       </div>
       <div onclick="closePictureGallery()" title="Back to Birthday Popup" style="margin-top: 20px; font-size: 28px; cursor: pointer;">⬅️</div>
     </div>
